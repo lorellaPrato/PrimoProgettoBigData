@@ -1,0 +1,10 @@
+2015-06-28,dolce,insalata,acqua,latte
+2015-06-07,pesce
+2015-06-01,uova,formaggio,latte
+2015-02-26,dolce,acqua
+2015-01-27,pane
+2015-06-15,dolce,pesce
+2015-03-19,acqua
+2015-01-12,latte
+2015-10-19,vino,pane,acqua
+2015-08-11,pesce
