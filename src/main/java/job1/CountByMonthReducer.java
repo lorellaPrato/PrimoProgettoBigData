@@ -3,24 +3,23 @@ package job1;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class CountByMonthReducer extends Reducer<Text, Writable, Text, Writable> {
-//private final static IntWritable SUM = new IntWritable();
+public class CountByMonthReducer extends Reducer<BiKeyWritable, IntWritable, Text, BiItemWritable> {
+	//private final static IntWritable SUM = new IntWritable();
     
-    public void reduce(Text key, Iterable<Writable> values, Context context) 
+    public void reduce(BiKeyWritable key, Iterable<IntWritable> values, Context context) 
     				throws IOException, InterruptedException {
        
-    	String elenco = "";
-    	Iterator<Writable> it = values.iterator();
-    	elenco = it.next().toString();
-    	while(it.hasNext()){
-    		Writable w = it.next();
-    		elenco = ", "+ w.toString();
-    	}
-    	
-    	context.write(key, new Text(elenco));
+    	 int sum = 0;
+         Iterator<IntWritable> iter = values.iterator();
+         while (iter.hasNext()) {
+             sum += iter.next().get();
+         }
+         BiItemWritable item= new BiItemWritable(key.getWord(), sum);
+    	 context.write(key.getDate(), item);
     }
 }

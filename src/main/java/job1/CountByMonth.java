@@ -2,6 +2,7 @@ package job1;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Job;
@@ -20,15 +21,18 @@ public class CountByMonth {
 		
 		job.setMapperClass(CountByMonthMapper.class);
 		// combiner use
-		//job.setCombinerClass(CountByMonthReducer.class);
+//		job.setCombinerClass(CountByMonthReducer.class);
 		job.setReducerClass(CountByMonthReducer.class);
 
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Writable.class);
-
+	
+        job.setMapOutputKeyClass(BiKeyWritable.class);
+        job.setMapOutputValueClass(IntWritable.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(BiItemWritable.class);
+        
 		job.waitForCompletion(true);
 	}
 
