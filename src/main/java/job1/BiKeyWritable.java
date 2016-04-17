@@ -64,16 +64,19 @@ public class BiKeyWritable implements WritableComparable<BiKeyWritable> {
     @Override
     public boolean equals(Object o) {
         if (o instanceof BiKeyWritable) {
-        	BiKeyWritable c = (BiKeyWritable) o;
-            return date.equals(c.getDate())
-                    && word.equals(c.getWord());
+          BiKeyWritable c = (BiKeyWritable) o;
+            return date.equals(c.date)
+                    && word.equals(c.word);
         }
         return false;
     }
 
-	public int compareTo(BiKeyWritable o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int compareTo(BiKeyWritable o) {
+        int cmp = date.compareTo(o.date);
+            if (cmp != 0) {
+                return cmp;
+            }
+            return word.compareTo(o.word);
+    }
 
 }
