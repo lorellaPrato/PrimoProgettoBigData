@@ -8,13 +8,12 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 								//Class Mapper<KEYIN,	   VALUEIN,KEYOUT,VALUEOUT>
-public class CountByMonthMapper extends Mapper<LongWritable, Text, BiKeyWritable, IntWritable>  {
-	
-//	private static final IntWritable one = new IntWritable();
-	private static final IntWritable ONE = new IntWritable(1);
-    private static final BiKeyWritable BIKEY = new BiKeyWritable();
+public class CountByMonthMapper extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable> {
+
+//	private static final IntWritable ONE = new IntWritable(1);
+    	private static final BiKeyWritable BIKEY = new BiKeyWritable();
 	private Text data = new Text();
-//	private final IntWritable one= new IntWritable(1);
+	private final BiItemWritable ONE= new BiItemWritable(new Text(""),1);
 	
  	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{

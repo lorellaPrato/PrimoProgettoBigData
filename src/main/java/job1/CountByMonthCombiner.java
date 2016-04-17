@@ -5,21 +5,24 @@ import java.util.Iterator;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Reducer;
 
-public class CountByMonthReducer extends Reducer<BiKeyWritable, BiItemWritable, Text, Text> {
+public class CountByMonthCombiner extends Reducer<BiKeyWritable, BiItemWritable, BiKeyWritable, BiItemWritable> {
+	private final static BiItemWritable RES = new BiItemWritable();
     
     public void reduce(BiKeyWritable key, Iterable<BiItemWritable> values, Context context) 
     				throws IOException, InterruptedException {
        
-    	 String result = "";
+    	 int sum = 0;
          Iterator<BiItemWritable> iter = values.iterator();
-	 result= (iter.next()).toString();
          while (iter.hasNext()) {
-		result= result+", "+(iter.next()).toString();
+             sum += (iter.next()).getCount();
          }
-    	 context.write(key.getDate(), new Text(result));
+	 RES.setWord(key.getWord());
+	 RES.setCount(sum);
+         
+         key.setWord(new Text(""));
+    	 context.write(key, RES);
     }
 }
 

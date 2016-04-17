@@ -67,14 +67,13 @@ public class BiItemWritable implements WritableComparable<BiItemWritable> {
     public boolean equals(Object o) {
         if (o instanceof BiItemWritable) {
         	BiItemWritable c = (BiItemWritable) o;
-            return word.equals(c.getWord());
+            return word.equals(c.word);
         }
         return false;
     }
 
 	public int compareTo(BiItemWritable o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	 return word.compareTo(o.word);
+    }
 
 }
