@@ -1,17 +1,17 @@
-package job1;
+package job2;
 
 import java.io.IOException;
 
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Mapper.Context;
 
-								//Class Mapper<KEYIN,	   VALUEIN,KEYOUT,VALUEOUT>
-public class CountByMonthMapper extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable> {
+import job2.BiItemWritable;
+import job2.BiKeyWritable;
 
-//	private static final IntWritable ONE = new IntWritable(1);
-    private static final BiKeyWritable BIKEY = new BiKeyWritable();
+public class CountByFoodMapper extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable> {
+	private static final BiKeyWritable BIKEY = new BiKeyWritable();
 	private Text data = new Text();
 	private final BiItemWritable ONE= new BiItemWritable(new Text(""),1);
 	
@@ -25,15 +25,13 @@ public class CountByMonthMapper extends Mapper<LongWritable, Text, BiKeyWritable
 		String a="";
 		for(int i=11; i<=line.length();i++){
 			if(i==line.length()){
-//				BIKEY = new BiKeyWritable();
-				BIKEY.set(data, new Text(line.substring(init,i)));
+				BIKEY.set(new Text(line.substring(init,i)),data);
 				context.write(BIKEY, ONE);
 			}
 			if(i<line.length()){
 				a=line.substring(i,i+1);
 				if(a.equals(",") || i==line.length()){
-//					BIKEY = new BiKeyWritable();
-					BIKEY.set(data, new Text(line.substring(init,i)));
+					BIKEY.set(new Text(line.substring(init,i)),data);
 				  	context.write(BIKEY, ONE);
 					init=i+1;
 				}

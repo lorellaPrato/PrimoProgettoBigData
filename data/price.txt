@@ -1,0 +1,10 @@
+uova 2$
+latte 2$
+pane 3$
+vino 5$
+pesce 10$
+insalata 1$
+formaggio 4$
+dolce 15$
+carne 16$
+acqua 1$
