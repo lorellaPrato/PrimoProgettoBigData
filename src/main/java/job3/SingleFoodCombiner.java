@@ -8,7 +8,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 
 
-public class FoodReceiptListCombiner extends Reducer<BiKeyWritable, BiItemWritable, BiKeyWritable, BiItemWritable>{
+public class SingleFoodCombiner extends Reducer<BiKeyWritable, BiItemWritable, BiKeyWritable, BiItemWritable>{
 	private final static BiItemWritable RES = new BiItemWritable();
     
     public void reduce(BiKeyWritable key, Iterable<BiItemWritable> values, Context context) 
@@ -17,13 +17,14 @@ public class FoodReceiptListCombiner extends Reducer<BiKeyWritable, BiItemWritab
          Iterator<BiItemWritable> iter = values.iterator();
          BiItemWritable item=iter.next();
          int i=1;
-         String list="receiptsList:"+(item.getIntValue());
+         //String list="receiptsList:"+(item.getIntValue());
          while (iter.hasNext()) {
-             list = list+" "+(iter.next()).getIntValue();
+             //list = list+" "+(iter.next()).getIntValue();
              i++;
          }
          RES.setIntValue(i);
-         RES.setStringValue(new Text(list));
+         RES.setStringValue(key.getFirst_key());
+         //RES.setStringValue(new Text(list));
 
     	 context.write(key, RES);
     }

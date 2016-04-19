@@ -18,6 +18,7 @@ public class BiItemWritable implements WritableComparable<BiItemWritable> {
         this.stringValue = k;
         this.intValue = w;
     }
+	
 
 	public void readFields(DataInput in) throws IOException {
 		stringValue = new Text(in.readUTF());
@@ -36,14 +37,14 @@ public class BiItemWritable implements WritableComparable<BiItemWritable> {
 
 	@Override
 	public int hashCode() {
-		return stringValue.hashCode() + intValue;
+		return stringValue.hashCode()+ intValue;
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof BiItemWritable) {
 			BiItemWritable c = (BiItemWritable) o;
-			return stringValue.equals(c.stringValue);
+			return (stringValue.equals(c.stringValue));
 		}
 		return false;
 	}

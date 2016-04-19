@@ -17,8 +17,8 @@ public class Statistic {
 		job.setMapperClass(PairFoodMapper.class);
 		job.setCombinerClass(PairFoodCombiner.class);
 		
-		job.setMapperClass(FoodReceiptListMapper.class);
-		job.setCombinerClass(FoodReceiptListCombiner.class);
+		job.setMapperClass(SingleFoodMapper.class);
+		job.setCombinerClass(SingleFoodCombiner.class);
 		
 		job.setMapperClass(CountReceiptMapper.class);
 		job.setCombinerClass(CountReceiptCombiner.class);

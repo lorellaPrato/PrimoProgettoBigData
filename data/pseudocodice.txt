@@ -3,9 +3,13 @@ JOB_3
 CountReceiptMapper --> key("receipt","receipt"), item("receipt",1)
 	CountReceipCombiner --> key("receipt","receipt"), item("tot_receipts",sum)
 					   
-FoodReceiptListMapper --> key(food,food), item(idReceipt,key.hashCode)
-	FoodReceiptListCombiner --> key(food,food), item(receiptsList,list.lenght)
+SingleFoodMapper --> key(food,food), item(idReceipt,key.hashCode)
+	SingleFoodCombiner --> key(food,food), item(food, #foodReceipts)
 					   
 PairFoodMapper --> key(food_1,food_2), item(idReceipt,key.hashCode)
-	PairFoodCombiner --> key(food_1,food_2), item(receiptsList,list.lenght)
+	PairFoodCombiner --> key(food_1,food_2), item(food_1 food_2,#food1_2Receipts)
 					   
+
+percentuali: dato food1 e food2
+--> (# scontrini con la coppia food1 e food2)/(# tot scontrini)
+--> (# scontrini con la coppia food1 e food2)/(# scontrini con food1)

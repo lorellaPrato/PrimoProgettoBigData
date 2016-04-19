@@ -12,17 +12,14 @@ public class PairFoodCombiner extends Reducer<BiKeyWritable, BiItemWritable, BiK
     
     public void reduce(BiKeyWritable key, Iterable<BiItemWritable> values, Context context) 
     				throws IOException, InterruptedException {
-       
+    	 String foods=key.getFirst_key().toString()+","+key.getSecond_key().toString();
          Iterator<BiItemWritable> iter = values.iterator();
-         BiItemWritable item=iter.next();
          int i=1;
-         String list="receiptsList:"+(item.getIntValue());
          while (iter.hasNext()) {
-             list = list+" "+(iter.next()).getIntValue();
              i++;
          }
          RES.setIntValue(i);
-         RES.setStringValue(new Text(list));
+         RES.setStringValue(new Text(foods));
 
     	 context.write(key, RES);
     }

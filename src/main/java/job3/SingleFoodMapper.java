@@ -7,7 +7,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
-public class FoodReceiptListMapper  extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>{
+public class SingleFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>{
     private static final BiKeyWritable BIKEY = new BiKeyWritable();
 	private final BiItemWritable ONE= new BiItemWritable(new Text(""),1);
 	private Text data = new Text();
