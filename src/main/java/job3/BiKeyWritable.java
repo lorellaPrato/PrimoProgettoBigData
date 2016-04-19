@@ -44,8 +44,11 @@ public class BiKeyWritable implements WritableComparable<BiKeyWritable>{
     public boolean equals(Object o) {
         if (o instanceof BiKeyWritable) {
           BiKeyWritable c = (BiKeyWritable) o;
-            return first_key.equals(c.first_key)
-                    && second_key.equals(c.second_key);
+          boolean control= ((first_key.equals(c.first_key)
+                  		  && second_key.equals(c.second_key)) || 
+        		  			(first_key.equals(c.second_key)
+                          && second_key.equals(c.first_key)));
+            return control;
         }
         return false;
     }

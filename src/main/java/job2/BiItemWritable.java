@@ -31,7 +31,7 @@ public class BiItemWritable implements WritableComparable<BiItemWritable> {
 
 	@Override
 	public String toString() {
-		return stringValue.toString() + ": " + intValue;
+		return stringValue.toString() + " " + intValue;
 	}
 
 	@Override
