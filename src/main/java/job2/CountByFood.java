@@ -4,17 +4,12 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import job1.BiItemWritable;
-import job1.BiKeyWritable;
-import job1.CountByMonth;
-import job1.CountByMonthCombiner;
-import job1.CountByMonthMapper;
-import job1.CountByMonthReducer;
+import job2.BiItemWritable;
+import job2.BiKeyWritable;
 
 public class CountByFood {
 	public static void main(String[] args) throws Exception {
@@ -27,10 +22,10 @@ public class CountByFood {
 		
 		
 		job.setMapperClass(CountByFoodMapper.class);
-		job.setMapperClass(CountByFoodMapperPrice.class);
-		// combiner use
-		
 		job.setCombinerClass(CountByFoodCombiner.class);
+		
+		job.setMapperClass(CountByFoodMapperPrice.class);
+		
 		job.setReducerClass(CountByFoodReducer.class);
 
 		MultipleInputs.addInputPath(job, p1, TextInputFormat.class, CountByFoodMapper.class);
