@@ -1,0 +1,11 @@
+JOB_3
+
+CountReceiptMapper --> key("receipt","receipt"), item("receipt",1)
+	CountReceipCombiner --> key("receipt","receipt"), item("tot_receipts",sum)
+					   
+FoodReceiptListMapper --> key(food,food), item(idReceipt,key.hashCode)
+	FoodReceiptListCombiner --> key(food,food), item(receiptsList,list.lenght)
+					   
+PairFoodMapper --> key(food_1,food_2), item(idReceipt,key.hashCode)
+	PairFoodCombiner --> key(food_1,food_2), item(receiptsList,list.lenght)
+					   

@@ -30,17 +30,32 @@ public class PairFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, B
 		for(int i=11; i<=line.length();i++){
 			if(i==line.length()){
 				food=line.substring(init,i);
-				BIKEY.set(new Text(food), new Text(food));
-				context.write(BIKEY, ONE);
+				insertToList(food);
 			}
 			if(i<line.length()){
 				a=line.substring(i,i+1);
 				if(a.equals(",") || i==line.length()){
-					BIKEY.set(new Text(food), new Text(food));
-				  	context.write(BIKEY, ONE);
+					food=line.substring(init,i);
+					insertToList(food);
 					init=i+1;
 				}
 			}
 		}
+		readList(context);
+	}
+
+	private void readList(Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>.Context context) {
+		//TODO
+		//BIKEY.set(new Text(food), new Text(food));
+		//context.write(BIKEY, ONE);
+		
+	}
+
+	private void insertToList(String food) {
+		boolean newFood=true;
+		for (String f : foodList) {
+			if(f.equals(food)) newFood=false;
+		}
+		if(newFood) foodList.add(food);
 	}
 }

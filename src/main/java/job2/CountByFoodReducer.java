@@ -21,7 +21,7 @@ public class CountByFoodReducer extends Reducer<BiKeyWritable, BiItemWritable, T
 		Iterator<BiItemWritable> it = values.iterator();
 		while (it.hasNext() && price==0) {
 			BiItemWritable item=it.next();
-			if((item.getStringValue().toString()).equals("price")) price=item.getIntValue();
+			if(((item.getStringValue()).toString()).equals("price ")) price=item.getIntValue();
 		}
 		//ri-scandisco la lista e moltiplico num di pezzi per prezzo
 		Iterator<BiItemWritable> it2 = values.iterator();
