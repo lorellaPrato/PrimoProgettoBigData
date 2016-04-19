@@ -7,9 +7,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
-import job1.BiItemWritable;
-import job1.BiKeyWritable;
-
 public class CountReceiptMapper  extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>{
 	private final String rec = "receipt";
 	private static final BiKeyWritable BIKEY = new BiKeyWritable();
