@@ -1,11 +1,13 @@
 package noJob3;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
+
 
 public class StatisticReducer extends Reducer<BiKeyWritable, ItemWritable, Text, Text> {
 	private static final ItemWritable TOT = new ItemWritable(new Text("tot"), 1);
@@ -13,6 +15,8 @@ public class StatisticReducer extends Reducer<BiKeyWritable, ItemWritable, Text,
 	public void reduce(BiKeyWritable key, Iterable<ItemWritable> values, Context context)
 			throws IOException, InterruptedException {
 		
+		
+
 		Text food1= key.getFirst_key();
 		int tot = 0;
 		int grade=0;
