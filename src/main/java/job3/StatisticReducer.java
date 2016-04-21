@@ -7,8 +7,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 
-import job2.BiItemWritable;
-
 public class StatisticReducer extends Reducer<BiKeyWritable, BiItemWritable, Text, Text> {
 	private static final BiItemWritable TOT = new BiItemWritable(new Text("tot"), 1);
 

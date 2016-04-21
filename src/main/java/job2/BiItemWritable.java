@@ -49,6 +49,10 @@ public class BiItemWritable implements WritableComparable<BiItemWritable> {
 	}
 
 	public int compareTo(BiItemWritable o) {
+		if(!((this.getStringValue()).toString()).contains("0")
+				&& ((o.getStringValue()).toString()).contains("0")) return 1;
+		if(((this.getStringValue()).toString()).contains("0")
+				&& !((o.getStringValue()).toString()).contains("0")) return -1;
 		return stringValue.compareTo(o.stringValue);
 	}
 

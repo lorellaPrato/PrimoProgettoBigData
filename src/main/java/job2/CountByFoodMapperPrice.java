@@ -24,7 +24,7 @@ public class CountByFoodMapperPrice extends Mapper<LongWritable, Text, BiKeyWrit
 
 		for (i = 0; i <= line.length(); i++) {
 			if (a.equals(" ")) {
-				String food=line.substring(init, i);
+				String food=line.substring(init, i-1);
 				BIKEY.set(new Text(food), new Text(food));
 				init = i + 1;
 			}
