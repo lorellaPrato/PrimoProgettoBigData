@@ -7,6 +7,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 
+import job2.BiItemWritable;
+
 public class StatisticReducer extends Reducer<BiKeyWritable, BiItemWritable, Text, Text> {
 	private static final BiItemWritable TOT = new BiItemWritable(new Text("tot"), 1);
 
@@ -28,19 +30,21 @@ public class StatisticReducer extends Reducer<BiKeyWritable, BiItemWritable, Tex
 		if (tot > 0 && grade>0) {
 			Iterator<BiItemWritable> it = values.iterator();
 			while (it.hasNext()) {
+				finalKey= food1.toString();
 				BiItemWritable second = it.next();
 				Text food2= second.getStringValue(); 
 				if(!food2.equals(food1) && !second.equals(TOT)){
 					finalKey= finalKey+","+food2.toString()+":";
-					int perc1= (second.getIntValue())/(tot);
-					int perc2= (second.getIntValue())/(grade);
+					double perc1= ((double)(second.getIntValue())/(tot))*100;
+					double perc2= ((double)(second.getIntValue())/(grade))*100;
 					result=perc1+"% "+perc2+"% ";
 					context.write(new Text(finalKey), new Text(result));
+					//System.out.println(finalKey+" "+result);
 				}
 			}
 		}
 		else context.write(food1, new Text("Error"));
-
+			//System.out.println("Error");
 	}
 
 }
