@@ -1,6 +1,7 @@
 package job3;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.apache.hadoop.io.LongWritable;
@@ -13,16 +14,16 @@ public class PairFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, B
 	private static final BiKeyWritable BIKEY = new BiKeyWritable();
 	private final BiItemWritable ONE= new BiItemWritable(new Text(""),1);
 	private Text data = new Text();
-	private LinkedList<String> foodList= new LinkedList<String>();
+	private ArrayList<String> foodList= new ArrayList<String>();
 	
  	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
 		
 		String line = value.toString();
 		data.set(line.substring(0,7));
-		String idReceipt="receipt"+data.toString()+key.toString();
-		ONE.setStringValue(new Text(idReceipt));
-		ONE.setIntValue(key.hashCode());
+		//String idReceipt="receipt"+data.toString()+key.toString();
+		ONE.setStringValue(new Text(data));
+		//ONE.setIntValue(key.hashCode());
 		
 		int init=11;
 		String a="";
@@ -30,13 +31,13 @@ public class PairFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, B
 		for(int i=11; i<=line.length();i++){
 			if(i==line.length()){
 				food=line.substring(init,i);
-				insertToList(food);
+				foodList.add(food);
 			}
 			if(i<line.length()){
 				a=line.substring(i,i+1);
 				if(a.equals(",") || i==line.length()){
 					food=line.substring(init,i);
-					insertToList(food);
+					foodList.add(food);
 					init=i+1;
 				}
 			}
@@ -44,18 +45,14 @@ public class PairFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, B
 		readList(context);
 	}
 
-	private void readList(Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>.Context context) {
+	private void readList(Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>.Context context) throws IOException, InterruptedException {
 		//TODO
-		//BIKEY.set(new Text(food), new Text(food));
-		//context.write(BIKEY, ONE);
-		
-	}
-
-	private void insertToList(String food) {
-		boolean newFood=true;
-		for (String f : foodList) {
-			if(f.equals(food)) newFood=false;
+		for(int i=0; i<foodList.size()-1; i++){
+			for(int j=i+1; j<foodList.size(); j++){
+				BIKEY.set(new Text(foodList.get(i)), new Text(foodList.get(j)));
+				context.write(BIKEY, ONE);
+			}
 		}
-		if(newFood) foodList.add(food);
+		
 	}
 }

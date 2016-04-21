@@ -9,17 +9,17 @@ import org.apache.hadoop.mapreduce.Mapper.Context;
 
 public class SingleFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>{
     private static final BiKeyWritable BIKEY = new BiKeyWritable();
-	private final BiItemWritable ONE= new BiItemWritable(new Text(""),1);
+	private static BiItemWritable ONE= new BiItemWritable(new Text(""),1);
 	private Text data = new Text();
 	
  	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
 		
 		String line = value.toString();
-		data.set(line.substring(0,7));
-		String idReceipt="receipt"+data.toString()+key.toString();
-		ONE.setStringValue(new Text(idReceipt));
-		ONE.setIntValue(key.hashCode());
+//		data.set(line.substring(0,7));
+//		String idReceipt="receipt"+data.toString()+key.toString();
+//		ONE.setStringValue(new Text(idReceipt));
+//		ONE.setIntValue(key.hashCode());
 		
 		int init=11;
 		String a="";
@@ -28,12 +28,14 @@ public class SingleFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable,
 			if(i==line.length()){
 				food=line.substring(init,i);
 				BIKEY.set(new Text(food), new Text(food));
+				ONE.setStringValue(new Text(food));
 				context.write(BIKEY, ONE);
 			}
 			if(i<line.length()){
 				a=line.substring(i,i+1);
 				if(a.equals(",") || i==line.length()){
 					BIKEY.set(new Text(food), new Text(food));
+					ONE.setStringValue(new Text(food));
 				  	context.write(BIKEY, ONE);
 					init=i+1;
 				}

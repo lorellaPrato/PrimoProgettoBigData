@@ -14,14 +14,16 @@ public class Statistic {
 		Job job = new Job(new Configuration(), "Statistic");
 		job.setJarByClass(Statistic.class);
 		
-		job.setMapperClass(PairFoodMapper.class);
-		job.setCombinerClass(PairFoodCombiner.class);
+		job.setMapperClass(CountReceiptMapper.class);
+		job.setCombinerClass(CountReceiptCombiner.class);
 		
 		job.setMapperClass(SingleFoodMapper.class);
 		job.setCombinerClass(SingleFoodCombiner.class);
 		
-		job.setMapperClass(CountReceiptMapper.class);
-		job.setCombinerClass(CountReceiptCombiner.class);
+		job.setMapperClass(PairFoodMapper.class);
+		job.setCombinerClass(PairFoodCombiner.class);
+		
+		
 		
 		job.setReducerClass(StatisticReducer.class);
 

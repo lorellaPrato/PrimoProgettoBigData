@@ -18,7 +18,7 @@ public class CountReceiptCombiner extends Reducer<BiKeyWritable, BiItemWritable,
          while (iter.hasNext()) {
              sum += (iter.next()).getIntValue();
          }
-         RES.setStringValue(new Text("tot_receipts"));
+         RES.setStringValue(new Text("tot"));
          RES.setIntValue(sum);
      
     	 context.write(key, RES);

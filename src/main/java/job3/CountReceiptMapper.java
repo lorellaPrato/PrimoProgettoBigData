@@ -8,9 +8,9 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
 public class CountReceiptMapper  extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>{
-	private final String rec = "receipt";
+	private static final String rec = "tot";
 	private static final BiKeyWritable BIKEY = new BiKeyWritable();
-	private final BiItemWritable ONE= new BiItemWritable(new Text(rec),1);
+	private static final BiItemWritable ONE= new BiItemWritable(new Text(rec),1);
 	
 	
 	

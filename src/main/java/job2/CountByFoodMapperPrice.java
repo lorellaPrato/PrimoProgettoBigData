@@ -12,7 +12,7 @@ import job2.BiKeyWritable;
 
 public class CountByFoodMapperPrice extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable> {
 	private static final BiKeyWritable BIKEY = new BiKeyWritable();
-	private final BiItemWritable ITEM = new BiItemWritable(new Text(""), 1);
+	private static BiItemWritable ITEM = new BiItemWritable(new Text("price"), 1);
 
 	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -26,7 +26,6 @@ public class CountByFoodMapperPrice extends Mapper<LongWritable, Text, BiKeyWrit
 			if (a.equals(" ")) {
 				String food=line.substring(init, i);
 				BIKEY.set(new Text(food), new Text(food));
-				ITEM.setStringValue(new Text("price"));
 				init = i + 1;
 			}
 			if (a.equals("$")) {
