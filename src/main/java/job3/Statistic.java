@@ -14,18 +14,18 @@ public class Statistic {
 		Job job = new Job(new Configuration(), "Statistic");
 		job.setJarByClass(Statistic.class);
 		
-		job.setMapperClass(CountReceiptMapper.class);
-		job.setCombinerClass(CountReceiptCombiner.class);
+//		job.setMapperClass(CountReceiptMapper.class);
+//		job.setCombinerClass(CountReceiptCombiner.class);
 		
-		job.setMapperClass(SingleFoodMapper.class);
-		job.setCombinerClass(SingleFoodCombiner.class);
+//		job.setMapperClass(SingleFoodMapper.class);
+//		job.setCombinerClass(SingleFoodCombiner.class);
 		
 		job.setMapperClass(PairFoodMapper.class);
 		job.setCombinerClass(PairFoodCombiner.class);
 		
 		
 		
-		job.setReducerClass(StatisticReducer.class);
+//		job.setReducerClass(StatisticReducer.class);
 
 		
 		FileInputFormat.addInputPath(job, new Path(args[0]));
