@@ -19,6 +19,7 @@ public class CountByFoodMapper extends Mapper<LongWritable, Text, BiKeyWritable,
 		
 		String line = value.toString();
 		data.set(line.substring(0,7));
+		ONE.setStringValue(data);
 		
 		int init=11;
 		String a="";

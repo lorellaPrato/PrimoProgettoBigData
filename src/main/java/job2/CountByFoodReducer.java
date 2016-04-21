@@ -7,14 +7,13 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 
-import job2.BiItemWritable;
-import job2.BiKeyWritable;
-
 public class CountByFoodReducer extends Reducer<BiKeyWritable, BiItemWritable, Text, Text> {
-	private BiItemWritable ITEM_PRICE= new BiItemWritable(new Text("price"), 1);
+
 	
 	public void reduce(BiKeyWritable key, Iterable<BiItemWritable> values, Context context)
 			throws IOException, InterruptedException {
+		
+		BiItemWritable ITEM_PRICE= new BiItemWritable(new Text("price"), 0);
 		
 		String res="";
 		int price=0;
