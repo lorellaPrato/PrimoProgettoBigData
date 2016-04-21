@@ -1,4 +1,4 @@
-package job3;
+package noJob3;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -7,14 +7,14 @@ import java.io.IOException;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.WritableComparable;
 
-public class BiItemWritable implements WritableComparable<BiItemWritable> {
+public class ItemWritable implements WritableComparable<ItemWritable> {
 	private Text stringValue;
 	private int intValue;
 
-	public BiItemWritable() {
+	public ItemWritable() {
     }
 
-	public BiItemWritable(Text k, int w) {
+	public ItemWritable(Text k, int w) {
         this.stringValue = k;
         this.intValue = w;
     }
@@ -42,14 +42,14 @@ public class BiItemWritable implements WritableComparable<BiItemWritable> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o instanceof BiItemWritable) {
-			BiItemWritable c = (BiItemWritable) o;
+		if (o instanceof ItemWritable) {
+			ItemWritable c = (ItemWritable) o;
 			return (stringValue.equals(c.stringValue));
 		}
 		return false;
 	}
 
-	public int compareTo(BiItemWritable o) {
+	public int compareTo(ItemWritable o) {
 		return stringValue.compareTo(o.stringValue);
 	}
 

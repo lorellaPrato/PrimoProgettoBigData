@@ -1,4 +1,4 @@
-package job3;
+package noJob3;
 
 import java.io.IOException;
 
@@ -7,10 +7,10 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
-public class CountReceiptMapper  extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>{
+public class CountReceiptMapper  extends Mapper<LongWritable, Text, BiKeyWritable, ItemWritable>{
 	private static final String rec = "tot";
 	private static final BiKeyWritable BIKEY = new BiKeyWritable();
-	private static final BiItemWritable ONE= new BiItemWritable(new Text(rec),1);
+	private static final ItemWritable ONE= new ItemWritable(new Text(rec),1);
 	
 	
 	

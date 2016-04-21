@@ -1,4 +1,4 @@
-package job3;
+package noJob3;
 
 import java.io.IOException;
 
@@ -7,9 +7,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
-public class SingleFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>{
+public class SingleFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, ItemWritable>{
     private static final BiKeyWritable BIKEY = new BiKeyWritable();
-	private final BiItemWritable ONE= new BiItemWritable(new Text(""),1);
+	private final ItemWritable ONE= new ItemWritable(new Text(""),1);
 	
  	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{

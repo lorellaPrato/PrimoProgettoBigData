@@ -1,4 +1,4 @@
-package job3;
+package noJob3;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -7,17 +7,17 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 
-public class PairFoodCombiner extends Reducer<BiKeyWritable, BiItemWritable, BiKeyWritable, BiItemWritable>{
-	private final static BiItemWritable RES = new BiItemWritable();
-	private final static BiItemWritable RES2 = new BiItemWritable();
+public class PairFoodCombiner extends Reducer<BiKeyWritable, ItemWritable, BiKeyWritable, ItemWritable>{
+	private final static ItemWritable RES = new ItemWritable();
+	private final static ItemWritable RES2 = new ItemWritable();
 	private final static BiKeyWritable BIKEY = new BiKeyWritable();
 	private final static BiKeyWritable BIKEY2 = new BiKeyWritable();
     
-    public void reduce(BiKeyWritable key, Iterable<BiItemWritable> values, Context context) 
+    public void reduce(BiKeyWritable key, Iterable<ItemWritable> values, Context context) 
     				throws IOException, InterruptedException {
     	
     	int sum = 0;
-        Iterator<BiItemWritable> iter = values.iterator();
+        Iterator<ItemWritable> iter = values.iterator();
         while (iter.hasNext()) {
             sum += (iter.next()).getIntValue();
         }

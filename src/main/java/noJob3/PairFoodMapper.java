@@ -1,4 +1,4 @@
-package job3;
+package noJob3;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,14 +10,14 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
 
-public class PairFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>{
+public class PairFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, ItemWritable>{
 	private static final BiKeyWritable BIKEY = new BiKeyWritable();
-	private final BiItemWritable ONE= new BiItemWritable(new Text(""),1);
+	private final ItemWritable ONE= new ItemWritable(new Text(""),1);
 	private Text data = new Text();
-	private ArrayList<String> foodList= new ArrayList<String>();
 	
  	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
+		ArrayList<String> foodList= new ArrayList<String>();
 		
 		String line = value.toString();
 		data.set(line.substring(0,7));
@@ -42,14 +42,16 @@ public class PairFoodMapper  extends Mapper<LongWritable, Text, BiKeyWritable, B
 				}
 			}
 		}
-		readList(context);
+		readList(foodList,context);
 	}
 
-	private void readList(Mapper<LongWritable, Text, BiKeyWritable, BiItemWritable>.Context context) throws IOException, InterruptedException {
-		//TODO
+	private void readList(ArrayList<String> foodList, Mapper<LongWritable, Text, BiKeyWritable, ItemWritable>.Context context) throws IOException, InterruptedException {
 		for(int i=0; i<foodList.size()-1; i++){
 			for(int j=i+1; j<foodList.size(); j++){
-				BIKEY.set(new Text(foodList.get(i)), new Text(foodList.get(j)));
+				if(foodList.get(i).compareTo(foodList.get(j))<=0)
+					BIKEY.set(new Text(foodList.get(i)), new Text(foodList.get(j)));
+				else if(foodList.get(i).compareTo(foodList.get(j))>0)
+					BIKEY.set(new Text(foodList.get(j)), new Text(foodList.get(i)));
 				context.write(BIKEY, ONE);
 			}
 		}

@@ -1,4 +1,4 @@
-package job3;
+package noJob3;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -44,6 +44,8 @@ public class BiKeyWritable implements WritableComparable<BiKeyWritable>{
     public boolean equals(Object o) {
         if (o instanceof BiKeyWritable) {
           BiKeyWritable c = (BiKeyWritable) o;
+          if(c.getFirst_key().toString().equals("tot") ||
+        		  this.getFirst_key().toString().equals("tot")) return true;
           boolean control= ((first_key.equals(c.first_key)
                   		  && second_key.equals(c.second_key)));
             return control;
