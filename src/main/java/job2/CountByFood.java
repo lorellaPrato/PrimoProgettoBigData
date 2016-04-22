@@ -13,7 +13,6 @@ import job2.BiKeyWritable;
 
 public class CountByFood {
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
 		
 		Job job = new Job(new Configuration(), "CountByFood");
 		Path p1= new Path(args[0]);

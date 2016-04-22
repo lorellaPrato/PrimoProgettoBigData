@@ -35,12 +35,17 @@ public class CountByFoodReducer extends Reducer<BiKeyWritable, BiItemWritable, T
 		}
 		
 		//scandisco la cache e creo l'elenco dei result
+		boolean first=true;
 		if(price>0 && cache.size()>1){
 			for (int j=0; j<cache.size(); j++) {
 				BiItemWritable val2= cache.get(j);
 				if(!(ITEM_PRICE.equals(cache.get(j)))){
 					totPrice= price*val2.getIntValue();
-					res=res+val2.getStringValue()+":"+totPrice+" ";	
+					if(first){
+						res=res+val2.getStringValue()+":"+totPrice;
+						first=false;
+					}
+					else res=res+", "+val2.getStringValue()+":"+totPrice;
 				}
 			}
 			context.write(key.getFirst_key(), new Text(res));

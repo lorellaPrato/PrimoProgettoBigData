@@ -21,7 +21,11 @@ public class ItemWritable implements WritableComparable<ItemWritable> {
         this.intValue = w;
     }
 	
-
+	public void set(Text k1, Text k2) {
+        this.stringFirstValue = k1;
+        this.stringSecondValue=k2;
+    }
+	
 	public void readFields(DataInput in) throws IOException {
 		stringFirstValue = new Text(in.readUTF());
 		stringSecondValue = new Text(in.readUTF());

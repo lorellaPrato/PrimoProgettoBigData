@@ -12,7 +12,6 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class CountByMonth {
 
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
 		
 		Job job = new Job(new Configuration(), "CountByMonth");
 

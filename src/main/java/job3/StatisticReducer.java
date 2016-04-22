@@ -8,15 +8,15 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class StatisticReducer extends Reducer<BiKeyWritable, ItemWritable, Text, Text> {
-
+	
 	public void reduce(BiKeyWritable key, Iterable<ItemWritable> values, Context context)
 			throws IOException, InterruptedException {
 		
 		ArrayList<ItemWritable> cache= new ArrayList<ItemWritable>();
 		LinkedList<ItemWritable> list= new LinkedList<ItemWritable>();
+		
 		int tot=0;
 		int firstFoodValue=0;
-		int secondFoodValue=0;
 		String finalKey="";
 		
 		for (ItemWritable item : values) {
@@ -42,7 +42,6 @@ public class StatisticReducer extends Reducer<BiKeyWritable, ItemWritable, Text,
 			Text food2=val.getStringSecondValue();
 			if(!(food1).equals((food2))){
 				firstFoodValue= searchValue(food1,list);
-				secondFoodValue= searchValue(food2,list);
 				double perc1= ((double)(val.getIntValue())/(tot))*100;
 				double perc2= ((double)(val.getIntValue())/(firstFoodValue))*100;
 				int p1=(int) perc1;
@@ -50,17 +49,8 @@ public class StatisticReducer extends Reducer<BiKeyWritable, ItemWritable, Text,
 				String result=p1+"% "+p2+"% ";
 				finalKey=val.toString();
 				context.write(new Text(finalKey), new Text(result));
-				
-				perc1= ((double)(val.getIntValue())/(tot))*100;
-				perc2= ((double)(val.getIntValue())/(secondFoodValue))*100;
-				p1=(int) perc1;
-				p2=(int) perc2;
-				result=p1+"% "+p2+"% ";
-				finalKey=food2.toString() + "," + food1.toString()+": ";
-				context.write(new Text(finalKey), new Text(result));
 			}
 		}
-
 }
 
 	private int searchValue(Text stringValue, LinkedList<ItemWritable> list) {
@@ -71,4 +61,5 @@ public class StatisticReducer extends Reducer<BiKeyWritable, ItemWritable, Text,
 		}
 		return value;
 	}
+
 }

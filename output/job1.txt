@@ -1,0 +1,12 @@
+2015-01	dolce 1, formaggio 1, pane 1, uova 1
+2015-02	formaggio 1, uova 1
+2015-03	acqua 1, dolce 1, latte 1, pane 1, pesce 1
+2015-04	pesce 3, vino 3, carne 1, formaggio 1
+2015-05	carne 1, formaggio 1, latte 1, uova 1
+2015-06	acqua 1, insalata 1, pane 1
+2015-07	dolce 2, carne 1, insalata 1, uova 1, vino 1
+2015-08	carne 1, formaggio 1, uova 1
+2015-09	pane 1, pesce 1, vino 1
+2015-10	pesce 1
+2015-11	uova 2, acqua 1, carne 1, dolce 1, formaggio 1
+2015-12	dolce 1
