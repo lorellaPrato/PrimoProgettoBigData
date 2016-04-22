@@ -2,7 +2,6 @@ package job3;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.apache.hadoop.io.Text;
@@ -36,7 +35,7 @@ public class StatisticReducer extends Reducer<BiKeyWritable, ItemWritable, Text,
 			}
 		}
 		
-		//scandisco la cache e cerco il prezzo
+		//scandisco la cache
 		for (int i=0; i<cache.size(); i++) {
 			ItemWritable val= cache.get(i);
 			Text food1=val.getStringValue();

@@ -11,7 +11,6 @@ import org.apache.hadoop.mapreduce.Mapper;
 public class StatisticMapper extends Mapper<LongWritable, Text, BiKeyWritable, ItemWritable>{
 	//private static final BiKeyWritable BIKEY = new BiKeyWritable();
 	private final ItemWritable ONE= new ItemWritable(new Text("one"),new Text("one"),1);
-	private Text data = new Text();
 	
  	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException{
