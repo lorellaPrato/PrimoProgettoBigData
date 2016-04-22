@@ -43,11 +43,21 @@ public class StatisticReducer extends Reducer<BiKeyWritable, ItemWritable, Text,
 			Text food2=val.getStringSecondValue();
 			if(!(food1).equals((food2))){
 				firstFoodValue= searchValue(food1,list);
-				//secondFoodValue= searchValue(food2);
+				secondFoodValue= searchValue(food2,list);
 				double perc1= ((double)(val.getIntValue())/(tot))*100;
 				double perc2= ((double)(val.getIntValue())/(firstFoodValue))*100;
-				String result=perc1+"% "+perc2+"% ";
+				int p1=(int) perc1;
+				int p2=(int) perc2;
+				String result=p1+"% "+p2+"% ";
 				finalKey=val.toString();
+				context.write(new Text(finalKey), new Text(result));
+				
+				perc1= ((double)(val.getIntValue())/(tot))*100;
+				perc2= ((double)(val.getIntValue())/(secondFoodValue))*100;
+				p1=(int) perc1;
+				p2=(int) perc2;
+				result=p1+"% "+p2+"% ";
+				finalKey=food2.toString() + "," + food1.toString()+": ";
 				context.write(new Text(finalKey), new Text(result));
 			}
 		}

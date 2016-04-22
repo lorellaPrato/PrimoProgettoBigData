@@ -16,9 +16,9 @@ public class Statistic {
 		job.setJarByClass(Statistic.class);
 		
 		job.setMapperClass(StatisticMapper.class);
-		//job.setCombinerClass(StatisticCombiner.class);
+		job.setCombinerClass(StatisticCombiner.class);
 		
-		//job.setReducerClass(StatisticReducer.class);
+		job.setReducerClass(StatisticReducer.class);
 
 		
 		FileInputFormat.addInputPath(job, new Path(args[0]));	
